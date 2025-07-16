@@ -136,7 +136,7 @@ const styles = {
   mainText: {
     fontSize: "20vw",
     fontWeight: "bold",
-    background: "url('/asset/background.jpg')", // 🔁 same image for text clip
+    background: "url('public/asset/background.jpg')", // 🔁 same image for text clip
     fontFamily: "'Dancing Script', cursive",
     backgroundSize: "cover",
     backgroundPosition: "center",
