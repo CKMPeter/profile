@@ -1,5 +1,5 @@
 {
-  "homepage": "https://CKMPeter.github.io/profile",
+  "homepage": "https://ckmpeter.github.io/profile",
   "name": "my-profile",
   "version": "0.1.0",
   "private": true,
@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^13.5.0",
     "bootstrap": "^5.3.7",
     "express": "^5.1.0",
+    "gh-pages": "^6.3.0",
     "react": "^19.1.0",
     "react-bootstrap": "^2.10.10",
     "react-dom": "^19.1.0",
@@ -25,7 +26,6 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
-
   },
   "eslintConfig": {
     "extends": [
