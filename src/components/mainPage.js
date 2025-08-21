@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { NavBar } from "./Items/navBar";
 import { HorizontalTimeline } from "./Items/timelineItem";
-import {VerticalSlider} from "./Items/verticalSlider";
-import {Button} from "react-bootstrap";
+import { VerticalSlider } from "./Items/verticalSlider";
+import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 // Timeline data
@@ -14,17 +14,45 @@ const timelineData = [
 ];
 
 const images = [
-  { src: "/projects/StoAstProject.jpg", label: "Sto&Ast", link: "https://sto-ast-render-frontend.onrender.com", ghlink: "https://github.com/CKMPeter/Sto_Ast" ,description: "A project that helps you to manage your file with an AI Assistance.", tech: "React Js, Express Js, Firebase" },
-  { src: "/projects/SideProject.jpg", label: "OurArchive", link: "https://ourarchive.onrender.com", ghlink: "https://github.com/CKMPeter/SpecialThings_Web", description: "A that i created for my one and only.", tech: "HTML, CSS" },
-  { src: "/projects/Portfolio.jpg", label: "Portfolio", link: "https://my-profile.onrender.com", ghlink: "", description: "A portfolio that i created to showcase my work.", tech: "React Js, Bootstrap" },
+  {
+    src: `${process.env.PUBLIC_URL}/projects/StoAstProject.jpg`,
+    label: "Sto&Ast",
+    link: "https://sto-ast-render-frontend.onrender.com",
+    ghlink: "https://github.com/CKMPeter/Sto_Ast",
+    description: "A project that helps you to manage your file with an AI Assistance.",
+    tech: "React Js, Express Js, Firebase",
+  },
+  {
+    src: `${process.env.PUBLIC_URL}/projects/SideProject.jpg`,
+    label: "OurArchive",
+    link: "https://ourarchive.onrender.com",
+    ghlink: "https://github.com/CKMPeter/SpecialThings_Web",
+    description: "A that i created for my one and only.",
+    tech: "HTML, CSS",
+  },
+  {
+    src: `${process.env.PUBLIC_URL}/projects/Portfolio.jpg`,
+    label: "Portfolio",
+    link: "https://my-profile.onrender.com",
+    ghlink: "",
+    description: "A portfolio that i created to showcase my work.",
+    tech: "React Js, Bootstrap",
+  },
 ];
 
 const sampleData = [
   { title: "Hobbies", description: "Somgthing i do in my spear time.", src: "" },
-  { title: "Judo", description: "A Sport that i have done for 6 years, and still compete till this day.", src: "/hobbies/Judo.jpg" },
-  { title: "Cheerleading", description: "A Sport i took interested in recently.", src: "/hobbies/Cheerleading.jpg" },
+  {
+    title: "Judo",
+    description: "A Sport that i have done for 6 years, and still compete till this day.",
+    src: `${process.env.PUBLIC_URL}/hobbies/Judo.jpg`,
+  },
+  {
+    title: "Cheerleading",
+    description: "A Sport i took interested in recently.",
+    src: `${process.env.PUBLIC_URL}/hobbies/Cheerleading.jpg`,
+  },
 ];
-
 
 // Style objects
 const styles = {
@@ -62,7 +90,7 @@ const styles = {
     flexDirection: "column",
     justifyContent: "flex-start",
     alignItems: "center",
-    position: "relative", // ✅ Required for absolute child if needed
+    position: "relative",
   },
   lowerleft: {
     flex: 1,
@@ -88,16 +116,16 @@ const styles = {
     flex: 1,
     display: "flex",
     flexDirection: "column",
-    justifyContent: "center", // ✅ Center the scroll area
+    justifyContent: "center",
     alignItems: "center",
-    overflow: "hidden",        // ✅ Hide overflow (no multi-image preview)
-    backgroundColor: "	#b5ead7",
+    overflow: "hidden",
+    backgroundColor: "#b5ead7",
     borderRadius: "8px",
     textAlign: "center",
   },
   imgScroll: {
     width: "100%",
-    height: "75%", // ✅ match child image/anchor height
+    height: "75%",
     objectFit: "contain",
     display: "flex",
     overflowX: "auto",
@@ -107,16 +135,14 @@ const styles = {
     padding: "0 10px",
     justifyContent: "flex-start",
   },
-
   imgStyle: {
     width: "100%",
     height: "100%",
-    objectFit: "contain", // to fill with cropped aspect or use 'contain' if you want full image
+    objectFit: "contain",
     scrollSnapAlign: "center",
     flexShrink: 0,
     borderRadius: "8px",
   },
-
   description: {
     marginBottom: "10px",
     color: "#333",
@@ -130,13 +156,12 @@ const styles = {
     transition: "transform 0.8s ease",
     display: "flex",
     justifyContent: "center",
-    alignItems: "center", // ✅ center vertically
+    alignItems: "center",
   },
-
   mainText: {
     fontSize: "20vw",
     fontWeight: "bold",
-    background: "url('/asset/background.jpg')", // 🔁 same image for text clip
+    background: `url(${process.env.PUBLIC_URL}/asset/background.jpg)`,
     fontFamily: "'Dancing Script', cursive",
     backgroundSize: "cover",
     backgroundPosition: "center",
@@ -150,8 +175,8 @@ const styles = {
     padding: "20px",
     textAlign: "left",
     display: "flex",
-    justifyContent: "flex-start", // 📝 align horizontally to left
-    alignItems: "flex-start",     // 📝 align vertically to top
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
     flexDirection: "column",
   },
   upperLeftHightlight: {
@@ -161,100 +186,95 @@ const styles = {
     listStyleType: "none",
   },
   upperLeftdescription: {
-    fontWeight:"bold",
+    fontWeight: "bold",
     marginBottom: "10px",
     fontFamily: "'Playfair Display', serif",
     color: "#333",
     fontSize: "2em",
     justifyContent: "left",
-    listStyleType: "none", // ✅ removes bullet
-    padding: 0,             // ✅ removes default padding
-    margin: 0,              // ✅ removes default margin
+    listStyleType: "none",
+    padding: 0,
+    margin: 0,
   },
   lowerleftTitle: {
     fontFamily: "'Playfair Display', serif",
     color: "#333",
-    fontWeight:"bold",
+    fontWeight: "bold",
   },
 };
 
 export const MainPage = () => {
   const imgScrollRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [showDescription, setShowDescription] = useState(false); // ✅ new state
+  const [showDescription, setShowDescription] = useState(false);
   const [hoveredStep, setHoveredStep] = useState(false);
 
+  useEffect(() => {
+    const scrollContainer = imgScrollRef.current;
+    if (!scrollContainer) return;
 
-    useEffect(() => {
-      
-        const scrollContainer = imgScrollRef.current;
-        if (!scrollContainer) return;
+    const children = scrollContainer.children;
+    let index = 0;
 
-        const children = scrollContainer.children;
-        let index = 0;
+    const scrollStep = () => {
+      if (children.length === 0) return;
 
-        const scrollStep = () => {
-            if (children.length === 0) return;
+      index = (index + 1) % children.length;
 
-            index = (index + 1) % children.length;
+      const child = children[index];
+      if (child) {
+        child.scrollIntoView({ behavior: "smooth", inline: "center" });
+        setCurrentIndex(index);
+      }
+    };
 
-            const child = children[index];
-            if (child) {
-            child.scrollIntoView({ behavior: "smooth", inline: "center" });
-            setCurrentIndex(index); // ✅ Update state
-            }
-        };
+    if (hoveredStep) return;
 
-        if(hoveredStep) return; // 📝 pause scrolling when hovered
+    const scrollInterval = setInterval(scrollStep, 3000);
+    return () => clearInterval(scrollInterval);
+  }, [hoveredStep]);
 
-        const scrollInterval = setInterval(scrollStep, 3000);
-        return () => clearInterval(scrollInterval);
-    }, [hoveredStep]);
+  useEffect(() => {
+    const scrollContainer = imgScrollRef.current;
+    if (!scrollContainer) return;
 
-    useEffect(() => {
-      const scrollContainer = imgScrollRef.current;
-      if (!scrollContainer) return;
+    const children = scrollContainer.children;
 
-      const children = scrollContainer.children;
+    const observerOptions = {
+      root: scrollContainer,
+      rootMargin: "0px",
+      threshold: 0.5,
+    };
 
-      const observerOptions = {
-        root: scrollContainer,
-        rootMargin: "0px",
-        threshold: 0.5, // 50% visibility triggers
-      };
+    const observerCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const index = Array.from(children).indexOf(entry.target);
+          setCurrentIndex(index);
+        }
+      });
+    };
 
-      const observerCallback = (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const index = Array.from(children).indexOf(entry.target);
-            setCurrentIndex(index);
-          }
-        });
-      };
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
 
-      const observer = new IntersectionObserver(observerCallback, observerOptions);
+    Array.from(children).forEach((child) => observer.observe(child));
 
-      Array.from(children).forEach((child) => observer.observe(child));
-
-      return () => {
-        observer.disconnect();
-      };
-    }, []);
-
-
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   return (
     <div style={styles.root}>
       <NavBar />
       <div style={styles.welcomePage}>
-        {/* LEFT SIDE */}
         <div style={styles.leftSection}>
           <div
             style={styles.upperleft}
             onMouseEnter={() => setShowDescription(true)}
             onMouseLeave={() => setShowDescription(false)}
           >
-            <div style={{...styles.upperLeftContent, position: "relative", overflow: "hidden"}}>
+            <div style={{ ...styles.upperLeftContent, position: "relative", overflow: "hidden" }}>
               <h1
                 style={{
                   ...styles.mainText,
@@ -273,12 +293,12 @@ export const MainPage = () => {
                   opacity: showDescription ? 1 : 0,
                   transform: showDescription ? "translateY(0%)" : "translateY(100%)",
                   transition: "opacity 0.5s ease, transform 0.8s ease",
-                  position: "absolute", // ✅ overlay in same area
+                  position: "absolute",
                   top: 0,
                   left: 0,
                   height: "100%",
                   width: "100%",
-                  backgroundColor: "#f5f0ea", // ✅ plain background revealed
+                  backgroundColor: "#f5f0ea",
                   display: "flex",
                   flexDirection: "column",
                 }}
@@ -287,37 +307,32 @@ export const MainPage = () => {
                   <li style={styles.upperLeftdescription}>I am a student at UTE.</li>
                   <li style={styles.upperLeftdescription}>Major in web designing.</li>
                 </ul>
-                <div style={{width: "95%"}}>
+                <div style={{ width: "95%" }}>
                   <p style={styles.description}>
-                    I specialize in creating websites that are both visually appealing and easy to use. 
-                    My passion lies in crafting clean designs that communicate clearly and leave a lasting impression. 
-                    Every project I build is guided by a balance of creativity and functionality to ensure meaningful digital experiences.</p>
+                    I specialize in creating websites that are both visually appealing and easy to use.
+                    My passion lies in crafting clean designs that communicate clearly and leave a lasting impression.
+                    Every project I build is guided by a balance of creativity and functionality to ensure meaningful digital experiences.
+                  </p>
                 </div>
-                <Button 
-                  variant="outline-dark"
-                  size="lg"
-                  style={{ marginRight: "5px" }}
-                >
+                <Button variant="outline-dark" size="lg" style={{ marginRight: "5px" }}>
                   Learn More
                 </Button>
               </div>
             </div>
           </div>
-          
-          
+
           <div style={styles.lowerleft}>
             <VerticalSlider items={sampleData} />
           </div>
         </div>
 
-        {/* RIGHT SIDE */}
         <div style={styles.rightSection}>
           <div style={styles.rightContainer}>
-            <img 
-              src="/asset/ava.jpg" 
+            <img
+              src={`${process.env.PUBLIC_URL}/asset/ava.jpg`}
               alt="Avatar"
               style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: "8px" }}
-              />
+            />
           </div>
           <div style={styles.rightContainer}>
             <div className="img-scroll" style={styles.imgScroll} ref={imgScrollRef}>
@@ -340,7 +355,7 @@ export const MainPage = () => {
                       objectFit: "cover",
                       borderRadius: "8px",
                       transition: "opacity 0.5s ease",
-                      opacity: hoveredStep ? 0 : 1, // fade out when hovered
+                      opacity: hoveredStep ? 0 : 1,
                       position: "absolute",
                       top: 0,
                       left: 0,
@@ -357,8 +372,8 @@ export const MainPage = () => {
                       display: "flex",
                       flexDirection: "column",
                       textAlign: "left",
-                      backgroundColor: "transparent", // semi-transparent overlay
-                      opacity: hoveredStep ? 1 : 0, // fade in when hovered
+                      backgroundColor: "transparent",
+                      opacity: hoveredStep ? 1 : 0,
                       transition: "opacity 0.5s ease",
                       padding: "10px",
                       borderRadius: "8px",
@@ -370,14 +385,11 @@ export const MainPage = () => {
                     <p style={styles.description}>
                       {img.description || "No description available."}
                     </p>
-                    <Button variant="outline-dark" size="lg" style={{ marginRight: "5px", width: "50%"}}>
+                    <Button variant="outline-dark" size="lg" style={{ marginRight: "5px", width: "50%" }}>
                       <Link
                         to={img.ghlink}
                         target="_blank"
-                        style={{
-                          textDecoration: "none",
-                          color: "inherit",
-                        }}
+                        style={{ textDecoration: "none", color: "inherit" }}
                       >
                         Visit Project
                       </Link>
