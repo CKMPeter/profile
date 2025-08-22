@@ -2,7 +2,7 @@
   import { NavBar } from './Items/navBar'
   import { Form, Card, Button } from 'react-bootstrap';
   import { useState, useRef, useEffect } from 'react';
-  import { FaFacebook, FaInstagram, FaLinkedin, FaDownload, FaGithub, FaMailBulk } from "react-icons/fa";
+  import { FaFacebook, FaInstagram, FaLinkedin, FaDownload, FaGithub, FaMailBulk, FaTiktok } from "react-icons/fa";
   import axios from "axios";
 
   const styles = {
@@ -255,14 +255,14 @@
 
                         {/* LinkedIn */}
                         <a
-                          href="https://www.linkedin.com/in/yourprofile"
+                          href="https://www.tiktok.com/@peter7903_"
                           target="_blank"
                           rel="noopener noreferrer"
                           style={{ color: "#0077B5", fontSize: "3.5rem", transition: "transform 0.2s" }}
                           onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.2)"}
                           onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}
                         >
-                          <FaLinkedin /> {/* ✅ Corrected */}
+                          <FaTiktok /> {/* ✅ Corrected */}
                         </a>
 
                         {/* GitHub (optional) */}
@@ -320,7 +320,7 @@
                           WebkitBackgroundClip: "text", 
                           WebkitTextFillColor: "transparent" 
                         }}/>, 
-                        <FaLinkedin color="#0077B5" />, 
+                        <FaTiktok color="#0077B5" />, 
                         <FaGithub color="#333" />
                       ].map((Icon, index) => (
                         <div key={index} style={{

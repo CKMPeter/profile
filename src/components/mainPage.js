@@ -30,10 +30,10 @@ const images = [
     tech: "HTML, CSS",
   },
   {
-    src: `${process.env.PUBLIC_URL}/projects/Portfolio.jpg`,
+    src: `${process.env.PUBLIC_URL}/projects/portfolio.png`,
     label: "Portfolio",
-    link: "https://my-profile.onrender.com",
-    ghlink: "",
+    link: "https://ckmpeter.github.io/profile",
+    ghlink: "https://github.com/CKMPeter/profile",
     description: "A portfolio that i created to showcase my work.",
     tech: "React Js, Bootstrap",
   },
