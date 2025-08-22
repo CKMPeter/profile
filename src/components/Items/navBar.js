@@ -23,24 +23,28 @@ const styles = {
     textDecoration: "none",
     fontWeight: "bold",
     fontFamily: "'Playfair Display', serif",
+    transition: "transform 0.2s ease-in-out",
   },
 };
 
 export const NavBar = () => {
   return (
     <nav style={styles.navBar}>
-      <div style={styles.container}>
-        <Link to="/" style={{ ...styles.link}}>
+      <div style={styles.container} >
+        <Link to="/" style={{ ...styles.link}} onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.2)"} onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}>
           CAO KHAI MINH
         </Link>
         <div style={styles.links}>
-          <Link to="/" style={styles.link}>
+          <Link to="/" style={{ ...styles.link}} onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.2)"} onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}>
             Home
           </Link>
-          <Link to="/about" style={styles.link}>
+          <Link to="/about" style={{ ...styles.link}} onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.2)"} onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}>
             About
           </Link>
-          <Link to="/contact" style={styles.link}>
+          <Link to="/portfolio" style={{ ...styles.link}} onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.2)"} onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}>
+            Portfolio
+          </Link>
+          <Link to="/contact" style={{ ...styles.link}} onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.2)"} onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}>
             Contact
           </Link>
         </div>

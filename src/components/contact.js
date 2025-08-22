@@ -3,6 +3,7 @@
   import { Form, Card, Button } from 'react-bootstrap';
   import { useState, useRef, useEffect } from 'react';
   import { FaFacebook, FaInstagram, FaLinkedin, FaDownload, FaGithub, FaMailBulk } from "react-icons/fa";
+  import axios from "axios";
 
   const styles = {
     root:{
@@ -79,6 +80,25 @@
     const [currentIconIndex, setCurrentIconIndex] = useState(0);
     const [showContent, setShowContent] = useState("email"); // track when to show inside
 
+    // inside Contact component
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+
+      const email = e.target.formBasicEmail.value;
+      const message = e.target.formBasicMessage.value;
+
+      try {
+        const res = await axios.post("http://localhost:4000/send-email", {
+          from: email,
+          message: message
+        });
+        alert("✅ Message sent successfully!");
+      } catch (err) {
+        console.error(err);
+        alert("❌ Failed to send message.");
+      }
+    };
+
     console.log("Selected Card:", showContent);
 
     useEffect(() => {
@@ -137,7 +157,7 @@
                       <p onClick={EmailRedirect} style={{ color: "blue", cursor: "pointer" }}>caokhaiminh7903@gmail.com</p>
                       <hr style={{ margin: "20px 0" }} />
                       <p style={styles.title1}>Or fill out the form below:</p>
-                      <Form style={styles.Form} onSubmit={(e) => e.preventDefault()}>
+                      <Form style={styles.Form} onSubmit={handleSubmit}>
                           <Form.Group controlId="formBasicEmail" >
                             <p style={styles.text}>Email:</p>
                             <Form.Control style={styles.box} type="email" placeholder="Enter your email" />
@@ -270,8 +290,8 @@
                         marginTop: "1.5rem" 
                       }}>
                         <a
-                          href="/files/MyResume.pdf"  // ✅ put your resume file in /public/files/
-                          download="Minh-CV.pdf"
+                          href="/contact/CaoKhaiMinhCV.pdf"  // ✅ put your resume file in /public/files/
+                          download="CaoKhaiMinhCV.pdf"
                           style={{ color: "#0077B5", fontSize: "3.5rem", transition: "transform 0.2s" }}
                           onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.2)"}
                           onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}
@@ -316,7 +336,6 @@
                   </Card>
               }
             </div>
-
           </div>
         </div>
       </div>

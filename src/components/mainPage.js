@@ -3,7 +3,6 @@ import { NavBar } from "./Items/navBar";
 import { HorizontalTimeline } from "./Items/timelineItem";
 import { VerticalSlider } from "./Items/verticalSlider";
 import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
 
 // Timeline data
 const timelineData = [
@@ -41,7 +40,7 @@ const images = [
 ];
 
 const sampleData = [
-  { title: "Hobbies", description: "Somgthing i do in my spear time.", src: "" },
+  { title: "Hobbies", description: "Something I do in my spare time.", src: "" },
   {
     title: "Judo",
     description: "A Sport that i have done for 6 years, and still compete till this day.",
@@ -220,7 +219,6 @@ export const MainPage = () => {
       if (children.length === 0) return;
 
       index = (index + 1) % children.length;
-
       const child = children[index];
       if (child) {
         child.scrollIntoView({ behavior: "smooth", inline: "center" });
@@ -229,7 +227,6 @@ export const MainPage = () => {
     };
 
     if (hoveredStep) return;
-
     const scrollInterval = setInterval(scrollStep, 3000);
     return () => clearInterval(scrollInterval);
   }, [hoveredStep]);
@@ -256,18 +253,16 @@ export const MainPage = () => {
     };
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
-
     Array.from(children).forEach((child) => observer.observe(child));
 
-    return () => {
-      observer.disconnect();
-    };
+    return () => observer.disconnect();
   }, []);
 
   return (
     <div style={styles.root}>
       <NavBar />
       <div style={styles.welcomePage}>
+        {/* LEFT SECTION */}
         <div style={styles.leftSection}>
           <div
             style={styles.upperleft}
@@ -311,7 +306,6 @@ export const MainPage = () => {
                   <p style={styles.description}>
                     I specialize in creating websites that are both visually appealing and easy to use.
                     My passion lies in crafting clean designs that communicate clearly and leave a lasting impression.
-                    Every project I build is guided by a balance of creativity and functionality to ensure meaningful digital experiences.
                   </p>
                 </div>
                 <Button variant="outline-dark" size="lg" style={{ marginRight: "5px" }}>
@@ -320,12 +314,12 @@ export const MainPage = () => {
               </div>
             </div>
           </div>
-
           <div style={styles.lowerleft}>
             <VerticalSlider items={sampleData} />
           </div>
         </div>
 
+        {/* RIGHT SECTION */}
         <div style={styles.rightSection}>
           <div style={styles.rightContainer}>
             <img
@@ -334,34 +328,41 @@ export const MainPage = () => {
               style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: "8px" }}
             />
           </div>
+
           <div style={styles.rightContainer}>
             <div className="img-scroll" style={styles.imgScroll} ref={imgScrollRef}>
               {images.map((img, idx) => (
-                <a
-                  href={img.link}
-                  style={{ ...styles.imgStyle, position: "relative", overflow: "hidden" }}
+                <div
                   key={idx}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  style={{ ...styles.imgStyle, position: "relative", overflow: "hidden" }}
                   onMouseEnter={() => setHoveredStep(true)}
                   onMouseLeave={() => setHoveredStep(false)}
                 >
-                  <img
-                    src={img.src}
-                    alt={img.label}
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                      borderRadius: "8px",
-                      transition: "opacity 0.5s ease",
-                      opacity: hoveredStep ? 0 : 1,
-                      position: "absolute",
-                      top: 0,
-                      left: 0,
-                    }}
-                  />
+                  {/* Image clickable to live project */}
+                  <a
+                    href={img.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ display: "block", height: "100%" }}
+                  >
+                    <img
+                      src={img.src}
+                      alt={img.label}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        borderRadius: "8px",
+                        transition: "opacity 0.5s ease",
+                        opacity: hoveredStep ? 0 : 1,
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                      }}
+                    />
+                  </a>
 
+                  {/* Overlay content */}
                   <div
                     style={{
                       position: "absolute",
@@ -382,22 +383,42 @@ export const MainPage = () => {
                     <h3 style={{ ...styles.lowerleftTitle, marginBottom: "10px" }}>
                       {img.label} {img.tech ? `(${img.tech})` : ""}
                     </h3>
-                    <p style={styles.description}>
-                      {img.description || "No description available."}
-                    </p>
-                    <Button variant="outline-dark" size="lg" style={{ marginRight: "5px", width: "50%" }}>
-                      <Link
-                        to={img.ghlink}
+                    <p style={styles.description}>{img.description}</p>
+
+                    {/* Buttons */}
+                    <div style={{ display: "flex", gap: "10px" }}>
+                      <Button
+                        as="a"
+                        href={img.link}
                         target="_blank"
-                        style={{ textDecoration: "none", color: "inherit" }}
+                        rel="noopener noreferrer"
+                        variant="outline-dark"
+                        size="lg"
+                        style={{ width: "50%" }}
                       >
-                        Visit Project
-                      </Link>
-                    </Button>
+                        Live Demo
+                      </Button>
+
+                      {img.ghlink && (
+                        <Button
+                          as="a"
+                          href={img.ghlink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          variant="outline-dark"
+                          size="lg"
+                          style={{ width: "50%" }}
+                        >
+                          GitHub
+                        </Button>
+                      )}
+                    </div>
                   </div>
-                </a>
+                </div>
               ))}
             </div>
+
+            {/* Dots */}
             <div style={{ display: "flex", justifyContent: "center", gap: "6px", marginTop: "10px" }}>
               {images.map((_, i) => (
                 <span
