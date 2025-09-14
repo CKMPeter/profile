@@ -1,0 +1,246 @@
+.root {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.welcomePage {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  background-color: #f8f9fa;
+  overflow: hidden;
+  gap: 10px;
+  padding: 2vw;
+}
+
+/* LEFT */
+.leftSection {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.upperleft {
+  flex: 2 1 0;  /* 2 parts, allow shrink/grow */
+  min-height: 0; /* 🔑 prevents flex child overflow */
+  background-color: #f5f0ea;
+  border-radius: 8px;
+  padding: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.upperLeftContent {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.8s ease;
+}
+
+.mainText {
+  font-size: clamp(2rem, 12vw, 15rem);
+  font-weight: bold;
+  font-family: "Dancing Script", cursive;
+  background-size: cover;      /* make sure it fills */
+  background-position: center; /* center the image */
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  transition: opacity 0.5s ease, transform 0.8s ease;
+}
+
+.descriptionContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: #f5f0ea;
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  transition: opacity 0.5s ease, transform 0.8s ease;
+}
+
+.upperLeftHighlight {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem 0;
+}
+
+.upperLeftDescription {
+  font-weight: bold;
+  font-size: 1.4rem;
+  font-family: "Playfair Display", serif;
+  color: #333;
+}
+
+.description {
+  color: #333;
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.lowerleft {
+  flex: 1 1 0;  /* 1 part */
+  min-height: 0;
+  background: #c7ceea;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* RIGHT */
+.rightSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rightContainer {
+  flex: 1;
+  background: #b5ead7;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.avatarImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* IMAGE SCROLL */
+.imgScroll {
+  width: 100%;
+  height: 75%;
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 10px;
+  padding: 0 10px;
+}
+
+.imgWrapper {
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  scroll-snap-align: center;
+}
+
+.imgItem {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: opacity 0.5s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.imgItem.hidden {
+  opacity: 0;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 1rem;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  background: rgba(255, 255, 255, 0.8);
+  transition: opacity 0.5s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border-radius: 8px;
+}
+
+.overlay.visible {
+  opacity: 1;
+}
+
+.overlayTitle {
+  font-weight: bold;
+  font-family: "Playfair Display", serif;
+  margin-bottom: 10px;
+}
+
+.overlayButtons {
+  display: flex;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #aaa;
+  transition: background 0.3s ease;
+}
+
+.dot.active {
+  background: #000;
+}
+
+/* 📱 Responsive */
+@media (max-width: 992px) {
+  .welcomePage {
+    flex-direction: column;
+  }
+
+  .leftSection,
+  .rightSection {
+    flex: 1 1 100%;
+  }
+
+  .imgScroll {
+    flex-direction: column;
+    height: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
+
+@media (max-width: 576px) {
+  .upperLeftDescription {
+    font-size: 1rem;
+  }
+
+  .description {
+    font-size: 0.9rem;
+  }
+
+  .overlayButtons button {
+    font-size: 0.8rem;
+    padding: 0.4rem;
+  }
+}
